@@ -1,23 +1,41 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #fff;
-  color: #222;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-body.dark-mode {
-  background: #121212;
-  color: #eee;
+/* Boutons stylisés */
+.btn-add {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.container {
-  max-width: 480px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fafafa;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  position: relative;
-  transition: background 0.3s ease;
+.btn-add:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-filter {
+  background: #f0f0f5;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 14px;
+  transition: all 0.2s;
+}
+
+.btn-filter:hover {
+  background: #dfe8ff;
+  color: #1e3a8a;
+  border-color: #7ba6ff;
+}
+
+/* Titre de catégorie */
+.category-title {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+  margin: 20px 0 10px;
+  color: #222;
 }
 body.dark-mode .container {
   background: #222;
@@ -38,5 +56,3 @@ body.dark-mode .container {
 #darkModeToggle:hover {
   transform: rotate(90deg);
 }
-
-/* Ajoute tes styles de boutons, input, liste, animations, barré, etc. */

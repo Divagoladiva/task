@@ -19,17 +19,18 @@
         <option value="month">Ce mois</option>
         <option value="year">Cette année</option>
       </select>
-      <button onclick="addTask()">Ajouter</button>
+      <button class="btn-add" onclick="addTask()">Ajouter</button>
     </div>
 
     <div class="filters fade-in">
-      <button onclick="filterTasks('today')">Aujourd'hui</button>
-      <button onclick="filterTasks('tomorrow')">Demain</button>
-      <button onclick="filterTasks('week')">Cette semaine</button>
-      <button onclick="filterTasks('month')">Ce mois</button>
-      <button onclick="filterTasks('year')">Cette année</button>
+      <button class="btn-filter" onclick="filterTasks('today')">Aujourd'hui</button>
+      <button class="btn-filter" onclick="filterTasks('tomorrow')">Demain</button>
+      <button class="btn-filter" onclick="filterTasks('week')">Cette semaine</button>
+      <button class="btn-filter" onclick="filterTasks('month')">Ce mois</button>
+      <button class="btn-filter" onclick="filterTasks('year')">Cette année</button>
     </div>
 
+    <div id="categoryTitle" class="fade-in category-title"></div>
     <div id="timer" class="fade-in"></div>
 
     <ul id="taskList"></ul>

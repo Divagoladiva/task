@@ -1,5 +1,9 @@
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let currentFilter = 'today';
+
+function saveTasks() {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 function addTask() {
   const input = document.getElementById('taskInput');
@@ -9,16 +13,19 @@ function addTask() {
 
   tasks.push({ text: input.value.trim(), category, done: false });
   input.value = '';
+  saveTasks();
   renderTasks();
 }
 
 function toggleTask(index) {
   tasks[index].done = !tasks[index].done;
+  saveTasks();
   renderTasks();
 }
 
 function deleteTask(index) {
   tasks.splice(index, 1);
+  saveTasks();
   renderTasks();
 }
 
@@ -34,7 +41,7 @@ function renderTasks() {
   const filtered = tasks.filter(t => t.category === currentFilter);
   filtered.forEach((task, i) => {
     const li = document.createElement('li');
-    li.className = task.done ? 'done' : '';
+    li.className = `task-item ${task.done ? 'done' : 'fade-in'}`;
     li.innerHTML = `
       <span onclick="toggleTask(${tasks.indexOf(task)})">${task.text}</span>
       <button onclick="deleteTask(${tasks.indexOf(task)})">✕</button>
@@ -54,9 +61,12 @@ function updateTimer() {
     case 'tomorrow':
       target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 2);
       break;
-    case 'week':
-      target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (7 - now.getDay()));
+    case 'week': {
+      const daysUntilMonday = (8 - now.getDay()) % 7 || 7;
+      target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + daysUntilMonday);
+      target.setHours(0, 0, 0, 0);
       break;
+    }
     case 'month':
       target = new Date(now.getFullYear(), now.getMonth() + 1, 1);
       break;

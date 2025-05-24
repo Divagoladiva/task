@@ -1,98 +1,42 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-}
-
-.app {
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  width: 90%;
-  max-width: 600px;
-  margin-top: 40px;
-}
-
-h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.controls, .filters {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.controls input, .controls select {
-  flex: 1;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 10
-}
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.fade-in {
-  animation: fadeIn 0.6s ease-out;
-}
-
-.slide-in {
-  animation: slideIn 0.5s ease-out;
-}
-
-/* Boutons stylisés */
-.btn-add {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  color: white;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 12px;
-  border: none;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.btn-add:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.btn-filter {
-  background: #f0f0f5;
-  color: #333;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 8px 14px;
-  transition: all 0.2s;
-}
-
-.btn-filter:hover {
-  background: #dfe8ff;
-  color: #1e3a8a;
-  border-color: #7ba6ff;
-}
-
-/* Titre de catégorie */
-.category-title {
-  text-align: center;
-  font-size: 1.4em;
-  font-weight: bold;
-  margin: 20px 0 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
   color: #222;
+  transition: background 0.3s ease, color 0.3s ease;
 }
+body.dark-mode {
+  background: #121212;
+  color: #eee;
+}
+
+.container {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  position: relative;
+  transition: background 0.3s ease;
+}
+body.dark-mode .container {
+  background: #222;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+#darkModeToggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+#darkModeToggle:hover {
+  transform: rotate(90deg);
+}
+
+/* Ajoute tes styles de boutons, input, liste, animations, barré, etc. */

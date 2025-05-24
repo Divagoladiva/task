@@ -8,9 +8,9 @@
 </head>
 <body>
   <div class="app">
-    <h1>Tâches à faire 🧠</h1>
+    <h1 class="fade-in">Tâches à faire 🧠</h1>
 
-    <div class="controls">
+    <div class="controls slide-in">
       <input type="text" id="taskInput" placeholder="Nouvelle tâche...">
       <select id="categorySelect">
         <option value="today">Aujourd'hui</option>
@@ -22,7 +22,7 @@
       <button onclick="addTask()">Ajouter</button>
     </div>
 
-    <div class="filters">
+    <div class="filters fade-in">
       <button onclick="filterTasks('today')">Aujourd'hui</button>
       <button onclick="filterTasks('tomorrow')">Demain</button>
       <button onclick="filterTasks('week')">Cette semaine</button>
@@ -30,7 +30,7 @@
       <button onclick="filterTasks('year')">Cette année</button>
     </div>
 
-    <div id="timer"></div>
+    <div id="timer" class="fade-in"></div>
 
     <ul id="taskList"></ul>
   </div>

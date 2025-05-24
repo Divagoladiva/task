@@ -36,9 +36,20 @@ function filterTasks(category) {
 
 function renderTasks() {
   const list = document.getElementById('taskList');
+  const title = document.getElementById('categoryTitle');
   list.innerHTML = '';
 
   const filtered = tasks.filter(t => t.category === currentFilter);
+  const labelMap = {
+    today: "Aujourd'hui",
+    tomorrow: "Demain",
+    week: "Cette semaine",
+    month: "Ce mois",
+    year: "Cette année"
+  };
+
+  title.textContent = `${labelMap[currentFilter]} (${filtered.length} tâche${filtered.length > 1 ? 's' : ''})`;
+
   filtered.forEach((task, i) => {
     const li = document.createElement('li');
     li.className = `task-item ${task.done ? 'done' : 'fade-in'}`;
@@ -76,13 +87,12 @@ function updateTimer() {
   }
 
   const diff = target - now;
-  const hours = Math.floor(diff / 3600000);
-  const minutes = Math.floor((diff % 3600000) / 60000);
-  const seconds = Math.floor((diff % 60000) / 1000);
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
 
   document.getElementById('timer').textContent =
-    `Temps restant: ${hours}h ${minutes}m ${seconds}s`;
+    `Temps restant: ${days}j ${hours}h ${minutes}m ${seconds}s`;
 }
-
-setInterval(updateTimer, 1000);
-renderTasks();

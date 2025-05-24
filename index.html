@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tâches à faire</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <h1>Tâches à faire 🧠</h1>
+
+    <div class="controls">
+      <input type="text" id="taskInput" placeholder="Nouvelle tâche...">
+      <select id="categorySelect">
+        <option value="today">Aujourd'hui</option>
+        <option value="tomorrow">Demain</option>
+        <option value="week">Cette semaine</option>
+        <option value="month">Ce mois</option>
+        <option value="year">Cette année</option>
+      </select>
+      <button onclick="addTask()">Ajouter</button>
+    </div>
+
+    <div class="filters">
+      <button onclick="filterTasks('today')">Aujourd'hui</button>
+      <button onclick="filterTasks('tomorrow')">Demain</button>
+      <button onclick="filterTasks('week')">Cette semaine</button>
+      <button onclick="filterTasks('month')">Ce mois</button>
+      <button onclick="filterTasks('year')">Cette année</button>
+    </div>
+
+    <div id="timer"></div>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,8 +1,10 @@
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let currentFilter = 'today';
+let lastResetTimes = JSON.parse(localStorage.getItem('lastResetTimes')) || {};
 
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('lastResetTimes', JSON.stringify(lastResetTimes));
 }
 
 function addTask() {
@@ -24,7 +26,7 @@ function toggleTask(index) {
 }
 
 function deleteTask(index) {
-  tasks.splice(index, 1);
+  tasks[index].done = true; // Ne supprime plus, juste barre la tâche
   saveTasks();
   renderTasks();
 }
@@ -37,6 +39,7 @@ function filterTasks(category) {
 function updateTimer() {
   const now = new Date();
   let target;
+  let resetKey = `${currentFilter}`;
 
   switch (currentFilter) {
     case 'today':
@@ -63,6 +66,15 @@ function updateTimer() {
   }
 
   const diff = target - now;
+
+  // Check for automatic reset
+  if (!lastResetTimes[resetKey] || (new Date(lastResetTimes[resetKey]) < target && now >= target)) {
+    tasks = tasks.filter(t => !(t.category === currentFilter && t.done));
+    lastResetTimes[resetKey] = now.toISOString();
+    saveTasks();
+    renderTasks();
+  }
+
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
@@ -91,14 +103,47 @@ function renderTasks() {
   filtered.forEach((task) => {
     const li = document.createElement('li');
     li.className = `task-item ${task.done ? 'done' : 'fade-in'}`;
+    li.setAttribute('draggable', true);
+
     li.innerHTML = `
-      <span onclick="toggleTask(${tasks.indexOf(task)})">${task.text}</span>
+      <span onmousedown="startDrag(event)" onclick="toggleTask(${tasks.indexOf(task)})">${task.text}</span>
       <button onclick="deleteTask(${tasks.indexOf(task)})">✕</button>
     `;
+
+    li.addEventListener('dragstart', (e) => handleDragStart(e, tasks.indexOf(task)));
+    li.addEventListener('dragover', handleDragOver);
+    li.addEventListener('drop', (e) => handleDrop(e, tasks.indexOf(task)));
+
     list.appendChild(li);
   });
 
-  updateTimer(); // Met à jour le timer après avoir changé de catégorie
+  updateTimer();
+}
+
+let dragSrcIndex = null;
+
+function handleDragStart(e, index) {
+  dragSrcIndex = index;
+  e.dataTransfer.effectAllowed = 'move';
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+}
+
+function handleDrop(e, index) {
+  e.preventDefault();
+  const draggedTask = tasks[dragSrcIndex];
+  tasks.splice(dragSrcIndex, 1);
+  tasks.splice(index, 0, draggedTask);
+  saveTasks();
+  renderTasks();
+}
+
+// Mode sombre
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
 }
 
 setInterval(updateTimer, 1000);

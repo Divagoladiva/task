@@ -57,3 +57,42 @@ h1 {
   animation: slideIn 0.5s ease-out;
 }
 
+/* Boutons stylisés */
+.btn-add {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-add:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-filter {
+  background: #f0f0f5;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 14px;
+  transition: all 0.2s;
+}
+
+.btn-filter:hover {
+  background: #dfe8ff;
+  color: #1e3a8a;
+  border-color: #7ba6ff;
+}
+
+/* Titre de catégorie */
+.category-title {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+  margin: 20px 0 10px;
+  color: #222;
+}
